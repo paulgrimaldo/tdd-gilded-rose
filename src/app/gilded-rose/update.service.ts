@@ -9,11 +9,11 @@ export class UpdateService {
 
   update(item: Item): Item {
     const strategy =
-      item.type === 'normal'
-        ? new NormalUpdateStrategy()
-        : new AgedBrieUpdateStrategy()
-            
-    return strategy.update(item)
+    (item.type === 'normal') ? new NormalUpdateStrategy() :
+    (item.type === 'agedBrie') ? new AgedBrieUpdateStrategy() :
+    (item.type === 'Old') ? new OldUpdateStrategy() :
+    new OldUpdateStrategy() ;        
+  return strategy.update(item)
   }
 }
 
@@ -43,10 +43,10 @@ class AgedBrieUpdateStrategy implements UpdateStrategy {
 
 class OldUpdateStrategy implements UpdateStrategy {
   update(item: Item): Item {
-    const targetQuality = item.quality - 1
-    const quality = targetQuality < 0 ? 0 : targetQuality
-    const targetSellIn = item.sellIn - 1
-    const sellIn = targetSellIn < 0 ? 0 : targetSellIn
+    const targetQuality = item.quality 
+    const targetSellIn = item.sellIn 
+    const quality = targetSellIn > 1 ? 0 : targetQuality    
+    const sellIn = targetSellIn > 1  ? 0 : targetSellIn
     return {
       type: 'Old',
       quality,
