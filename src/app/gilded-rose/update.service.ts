@@ -12,8 +12,22 @@ export class UpdateService {
     (item.type === 'normal') ? new NormalUpdateStrategy() :
     (item.type === 'agedBrie') ? new AgedBrieUpdateStrategy() :
     (item.type === 'Old') ? new OldUpdateStrategy() :
-    new OldUpdateStrategy() ;        
+    new CjdUpdateStrategy() ;    //Conjured     
   return strategy.update(item)
+  }
+}
+
+class CjdUpdateStrategy implements UpdateStrategy {
+  update(item: Item): Item {
+    const targetQuality = item.quality - 2
+    const quality = targetQuality < 0 ? 0 : targetQuality
+    const targetSellIn = item.sellIn - 1
+    const sellIn = targetSellIn < 0 ? 0 : targetSellIn
+    return {
+      type: 'Conjured',
+      quality,
+      sellIn,
+    }
   }
 }
 
