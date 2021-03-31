@@ -12,6 +12,7 @@ export class UpdateService {
       item.type === 'normal'
         ? new NormalUpdateStrategy()
         : new AgedBrieUpdateStrategy()
+            
     return strategy.update(item)
   }
 }
@@ -36,6 +37,20 @@ class AgedBrieUpdateStrategy implements UpdateStrategy {
       type: 'normal',
       quality: item.quality + 1,
       sellIn: item.sellIn - 1,
+    }
+  }
+}
+
+class OldUpdateStrategy implements UpdateStrategy {
+  update(item: Item): Item {
+    const targetQuality = item.quality - 1
+    const quality = targetQuality < 0 ? 0 : targetQuality
+    const targetSellIn = item.sellIn - 1
+    const sellIn = targetSellIn < 0 ? 0 : targetSellIn
+    return {
+      type: 'Old',
+      quality,
+      sellIn,
     }
   }
 }

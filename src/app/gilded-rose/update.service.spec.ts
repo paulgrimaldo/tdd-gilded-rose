@@ -63,16 +63,26 @@ describe('UpdateService', () => {
     })
   })
 
-  describe('Old Requerimiento 7 y 8', () => {
-    it('when Q: 10, Q: 11', () => {
+  describe('Old Requerimiento 6 y 7', () => {
+    it('when Q:10 S:2, then Q: 0 S:0', () => {
       const normalItem: Item = {
-        type: 'agedBrie',
+        type: 'Old',
         quality: 10,
-        sellIn: 5,
+        sellIn: 2,
       }
       const result = service.update(normalItem)
-      expect(11).toEqual(result.quality)
-      expect(4).toEqual(result.sellIn)
+      expect(0).toEqual(result.quality)
+      expect(0).toEqual(result.sellIn)
+    })
+    it('when Q:10 S:1, then Q: 10 S:1', () => {
+      const normalItem: Item = {
+        type: 'Old',
+        quality: 10,
+        sellIn: 1,
+      }
+      const result = service.update(normalItem)
+      expect(10).toEqual(result.quality)
+      expect(1).toEqual(result.sellIn)
     })
   })
 })
