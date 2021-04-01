@@ -27,18 +27,18 @@ describe('UpdateService', () => {
       expect(4).toEqual(result.sellIn)
     })
 
-    it('when Q: 5, Q: 4', () => {
+    it('when Q: 7, expected Q: 6', () => {
       const normalItem: Item = {
         type: 'normal',
-        quality: 5,
+        quality: 7,
         sellIn: 2,
       }
       const result = service.update(normalItem)
-      expect(4).toEqual(result.quality)
+      expect(6).toEqual(result.quality)
       expect(1).toEqual(result.sellIn)
     })
 
-    it('when Q: 0, Q: 0', () => {
+    it('when Q: 0, expected Q: 0', () => {
       const normalItem: Item = {
         type: 'normal',
         quality: 0,
