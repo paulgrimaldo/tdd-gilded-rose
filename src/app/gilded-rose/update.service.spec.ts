@@ -50,6 +50,7 @@ describe('UpdateService', () => {
     })
   })
 
+
   describe('Aged Brie', () => {
     it('when Q: 10, Q: 11', () => {
       const normalItem: Item = {
@@ -60,6 +61,61 @@ describe('UpdateService', () => {
       const result = service.update(normalItem)
       expect(11).toEqual(result.quality)
       expect(4).toEqual(result.sellIn)
+    })
+    it('when Q: 5, Q: 6', () => {
+      const normalItem: Item = {
+        type: 'agedBrie',
+        quality: 5,
+        sellIn: 4,
+      }
+      const result = service.update(normalItem)
+      expect(6).toEqual(result.quality)
+      expect(3).toEqual(result.sellIn)
+    })
+    it('when Q: 0, Q: 1', () => {
+      const normalItem: Item = {
+        type: 'agedBrie',
+        quality: 0,
+        sellIn: 1,
+      }
+      const result = service.update(normalItem)
+      expect(1).toEqual(result.quality)
+      expect(0).toEqual(result.sellIn)
+    })
+  })
+
+
+  
+  describe('Req legendary', () => {
+    it('when Q:10, expected Q:10', () => {
+      const normalItem: Item = {
+        type: 'legendary',
+        quality: 10,
+        sellIn: 5,
+      }
+      const result = service.update(normalItem)
+      expect(10).toEqual(result.quality)
+      expect(4).toEqual(result.sellIn)
+    })
+    it('when Q:7, expected Q:7', () => {
+      const normalItem: Item = {
+        type: 'legendary',
+        quality: 7,
+        sellIn: 3,
+      }
+      const result = service.update(normalItem)
+      expect(7).toEqual(result.quality)
+      expect(2).toEqual(result.sellIn)
+    })
+    it('when Q:3, expected Q:3', () => {
+      const normalItem: Item = {
+        type: 'legendary',
+        quality: 3,
+        sellIn: 1,
+      }
+      const result = service.update(normalItem)
+      expect(3).toEqual(result.quality)
+      expect(0).toEqual(result.sellIn)
     })
   })
 

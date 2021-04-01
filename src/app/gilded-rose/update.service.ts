@@ -12,6 +12,7 @@ export class UpdateService {
     (item.type === 'normal') ? new NormalUpdateStrategy() :
     (item.type === 'agedBrie') ? new AgedBrieUpdateStrategy() :
     (item.type === 'Old') ? new OldUpdateStrategy() :
+    (item.type === 'legendary') ? new LegendaryStrategy() :
     new CjdUpdateStrategy() ;    //Conjured     
   return strategy.update(item)
   }
@@ -63,6 +64,21 @@ class OldUpdateStrategy implements UpdateStrategy {
     const sellIn = targetSellIn > 1  ? 0 : targetSellIn
     return {
       type: 'Old',
+      quality,
+      sellIn,
+    }
+  }
+}
+
+
+
+class LegendaryStrategy implements UpdateStrategy {
+  update(item: Item): Item {
+    const quality = item.quality
+    const targetSellIn = item.sellIn - 1
+    const sellIn = targetSellIn < 0 ? 0 : targetSellIn
+    return {
+      type: 'legendary',
       quality,
       sellIn,
     }
