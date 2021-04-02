@@ -180,6 +180,36 @@ describe('UpdateService', () => {
       expect(0).toEqual(result.quality);
       expect(1).toEqual(result.sellIn);
     });
+    it('when Q:8 S:2, then Q:6 S:1', () => {
+      const normalItem: Item = {
+        type: 'Conjured',
+        quality: 8,
+        sellIn: 2,
+      };
+      const result = service.update(normalItem);
+      expect(6).toEqual(result.quality);
+      expect(1).toEqual(result.sellIn);
+    });
+    it('when Q:1 S:0, then Q:0 S:0', () => {
+      const conjuredItem: Item = {
+        type: 'Conjured',
+        quality: 1,
+        sellIn: 0,
+      };
+      const result = service.update(conjuredItem);
+      expect(0).toEqual(result.quality);
+      expect(0).toEqual(result.sellIn);
+    });
+    it('when Q:0 S:0, then Q:0 S:0', () => {
+      const conjuredItem: Item = {
+        type: 'Conjured',
+        quality: 0,
+        sellIn: 0,
+      };
+      const result = service.update(conjuredItem);
+      expect(0).toEqual(result.quality);
+      expect(0).toEqual(result.sellIn);
+    });
   });
 
   describe('Backstage Passes', () => {
